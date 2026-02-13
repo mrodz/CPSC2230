@@ -1,0 +1,30 @@
+ESTIMATE of time to complete assignment: 8 hours
+
+      Time     Time
+Date  Started  Spent Work completed
+----  -------  ----  --------------
+2/12  10:48am  0:10  Read assignment, set up ssh to the zoo, copy over
+                     files from /c/cs223/hw2/Required
+2/12  10:58am  0:05  Fixed linker error in makefile; learned that linking
+                     does not include math.h and I must pass the -lm flag
+                     to the linking target: 
+                     https://stackoverflow.com/questions/44175151/what-is-the-meaning-of-lm-in-gcc
+2/12  11:10am  0:55  Implemented command line parsing in cli.c, used opaque pointer
+                     design pattern.
+2/12  12:10pm  4:00  Implemented file parsing. The name is dynamic and can grow.
+                     the amount of locations is dynamic and can grow. Added robust
+                     enum-based error system to report user errors. Moved constructors
+                     and destructors to NAME_init and NAME_deinit pattern. Passes valgrind:
+                     ==1992937== HEAP SUMMARY:
+                     ==1992937==     in use at exit: 0 bytes in 0 blocks
+                     ==1992937==   total heap usage: 128 allocs, 128 frees, 12,333 bytes allocated
+                     ==1992937== 
+                     ==1992937== All heap blocks were freed -- no leaks are possible
+               ----
+               2:25  TOTAL time spent
+
+I did not discuss my solution with anybody. I banged it out in one go after
+playing around with building a CLI parsing library (just for fun).
+
+DISCUSSION
+

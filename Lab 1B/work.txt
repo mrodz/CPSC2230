@@ -1,0 +1,39 @@
+{day_of_the_tide = -240188631, crew = {0x7fffffffd8b8 "", 0x7fffffffd900 "@\331\377\377\377\177", 
+    0x7ffff7fdeddb <init_cpu_features+2043> "H\201\304", <incomplete sequence \310>, 
+    0x10 <error: Cannot access memory at address 0x10>, 0x40 <error: Cannot access memory at address 0x40>, 
+    0x1a40000 <error: Cannot access memory at address 0x1a40000>, 
+    0xf <error: Cannot access memory at address 0xf>, 
+    0xffffffffffffffff <error: Cannot access memory at address 0xffffffffffffffff>, 
+    0x40 <error: Cannot access memory at address 0x40>, 0xc <error: Cannot access memory at address 0xc>, 
+    0xe20000 <error: Cannot access memory at address 0xe20000>, 
+    0x800 <error: Cannot access memory at address 0x800>, 
+    0xe20000 <error: Cannot access memory at address 0xe20000>, 
+    0xc000 <error: Cannot access memory at address 0xc000>, 
+    0x1c40000 <error: Cannot access memory at address 0x1c40000>, 
+    0x1c40000 <error: Cannot access memory at address 0x1c40000>, 
+    0x200000 <error: Cannot access memory at address 0x200000>, 
+    0xc000 <error: Cannot access memory at address 0xc000>}, correct_index = 140737488345272, 
+  west_point = 3.0344539811099833e-312, era_of_destiny = 0, celestial_moon = 0, north_point = 0, 
+  passageway_key = 0}
+
+(gdb) print k.crew[i]
+$3 = 0x555555556320 "Ozan"
+
+$2 = 0x555555556325 "Alan"
+
+Key 1 is Alan\
+Key 2 might be 64
+DATE_LENGTH is 10
+85          sscanf(date_string, "%d/%d/%d", &a, &b, &c);
+fails if a != k.celestial_moon || b != k.day_of_the_tide || c != k.era_of_destiny
+2/5/2026
+
+argv[4] is k.north_point
+argv[5] is k.west_point
+
+$3 = {day_of_the_tide = 5, crew = {0x555555556320 "Ozan", 0x555555556325 "Alan", 0x55555555632a "Andrea", 0x555555556331 "Angelica", 0x55555555633a "Caleb", 0x555555556340 "Diana", 0x555555556346 "Marcus", 0x55555555634d "Kevin", 0x555555556353 "Noah", 0x555555556358 "Denise", 0x55555555635f "Quentin", 0x55555555634d "Kevin", 0x555555556367 "James", 0x55555555636d "Joseph", 0x555555556374 "Ethan", 0x55555555637a "Itamar", 0x555555556381 "Ephraim", 0x555555556389 "Rishi"}, correct_index = 1, west_point = -72.924620000000004, era_of_destiny = 2026, celestial_moon = 2, north_point = 41.312330000000003, passageway_key = 419}
+
+r Alan 419 2/5/2026 41.312330000000003 -72.924620000000004
+
+$1 = {day_of_the_tide = 5, crew = {0x555555556320 "Ozan", 0x555555556325 "Alan", 0x55555555632a "Andrea", 0x555555556331 "Angelica", 0x55555555633a "Caleb", 0x555555556340 "Diana", 0x555555556346 "Marcus", 0x55555555634d "Kevin", 0x555555556353 "Noah", 0x555555556358 "Denise", 0x55555555635f "Quentin", 0x55555555634d "Kevin", 0x555555556367 "James", 0x55555555636d "Joseph", 0x555555556374 "Ethan", 0x55555555637a "Itamar", 0x555555556381 "Ephraim", 0x555555556389 "Rishi"}, correct_index = 1, west_point = -72.924620000000004, era_of_destiny = 2026, celestial_moon = 2, north_point = 41.312330000000003, passageway_key = 419}
+

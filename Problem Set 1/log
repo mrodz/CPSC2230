@@ -1,0 +1,49 @@
+ESTIMATE of time to complete assignment: 2 hours
+
+      Time     Time
+Date  Started  Spent Work completed
+----  -------  ----  --------------
+1/26   2:00pm  0:15  read assignment, downloaded zip file, set up ssh to
+                     the zoo.
+1/26   2:15pm  1:00  I played around with making a command-line argument
+                     parsing library. Then, I realized I couldn't use it
+                     for this assignment anyways because this assignment does
+                     not allow for any heap allocations :(
+1/27   3:00pm  0:10  extract command line arguments to their correct type
+                     by using atoi and assertions to ensure no invariant
+                     inputs occur.
+1/27   3:10pm  0:30  implemented the life.h interface in life.c
+1/28   9:29pm  0:05  added more assertions to main.c to ensure no bad input
+                     could occur. 
+1/28   9:34pm  0:05  format code with VSCode formatter and add comments
+1/28   9:39pm  0:20  write logfile discussion
+1/28  10:00pm  0:05  finished debugging and uploading to gradescope
+               ----
+               2:25  TOTAL time spent
+
+I did not discuss my solution with anybody. I banged it out in one go after
+playing around with building a CLI parsing library (just for fun).
+
+DISCUSSION
+
+I've written Conway's game of life in C before as an exercise for a programming
+course I took way back in the day. Therefore, this assignment was not very challenging.
+Because the actual implementation was not too complex, I will discuss two difficulties I
+encountered running/coding the assignment. First, there is an issue with my Visual Studio code
+that sometimes means C/C++ Intellisense gets stuck on indexing. This is just annoying when
+it comes to type hints and code formatting. I eventually found out that the issue gets fixed
+50% if the files that the Intellisense tries to index are in the PWD of the editor's open folder.
+I encountered a subtle bug caused by inconsistent #define symbolic constants. The grid dimensions
+ROWS and COLS are baked into each compiled object file. I built the project with one set of values,
+then built it again using a different set of values without cleaning. Because the makefile is 
+rudimentary and doesn't declare dependencies, the final Life executable contained conflicting 
+assumptions about ROWS and COLS. This resulted in:
+
+```
+*** stack smashing detected ****
+Aborted (core dumped)
+```
+
+Running `make clean` fixed this, of course.
+
+And that's all! This assignment was a fun refresher to C.

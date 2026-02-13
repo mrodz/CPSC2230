@@ -1,0 +1,25 @@
+ESTIMATE of time to complete assignment: 5 minutes
+
+      Time     Time
+Date  Started  Spent Work completed
+----  -------  ----  --------------
+1/17   9:18pm  0:01  read assignment
+1/17   9:19pm  0:01  wrote the code for the assignment
+1/20  12:38pm  0:03  figured out what a log file was, and the expectations
+                     for this class; then, I wrote the log file
+1/20  12:45am  0:20  program passes all public tests
+1/20  10:47pm  0:03  wrote the log file
+               ----
+               0:28  TOTAL time spent
+
+I did not discuss my solution with anybody. I helped Ethan Ebizadeh
+set up an ssh keychain on his machine. I helped Yanga Booker learn
+about strings. The hardest part of this assignment was running the test suite.
+
+DISCUSSION
+
+I had no idea that in order to update the source code file that the test suite builds with a makefile, I had to run:
+
+> /c/cs223/bin/submit 0 hello.c 
+
+I did not feel like this was articulated in the test suite docs, so I was scratching my head going through the Perl files trying to understand why outdated code was being compiled in the makefile. Anyways, once I got this problem debugged, I submitted the assignment! All is well. Brainstorming my “fun” facts took longer than writing the print statement. I used string literal concatenation to make my code prettier.

@@ -1,0 +1,18 @@
+Reflection Questions (turn in short answers)
+
+---
+What is the biggest limitation of this program’s design?
+
+One of the biggest limitations is the fact that the size of the line of the file AND the number of lines 
+in the file is fixed at compile time. That means that the user cannot arbitrarily use our code to parse
+large files that do not fit the predefined dimensions. This lack of dynamic memory allocation means our code
+is less useful and the program needs to be recompiled EVERY TIME that we want to change the input dimensions.
+This also means stack memory could be wasted because, if we make the dimensions too high, but the file input is
+small, then we allocate too much stack space. The inverse could also be true and cause problems.
+
+---
+Is defining the struct in the header a good idea?
+
+Yes, it is a good idea to define structs in the header! Defining the struct in the header is a good abstraction 
+because it creates an interface to the data, but leaves implementation elsewhere. This separation of concerns is 
+good programming design. It's also good practice to define types in header files.

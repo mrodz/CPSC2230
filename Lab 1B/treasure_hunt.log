@@ -1,0 +1,202 @@
++show logging
+logging debugredirect:  off: Debug output will go to both the screen and the log file.
+logging enabled:  on: Logging is enabled.
+logging file:  The current logfile is "treasure_hunt.log".
+logging overwrite:  off: Logging appends to the log file.
+logging redirect:  off: Output will go to both the screen and the log file.
++r
+Starting program: /home/classes/cs223/class/rodriguez.mateo.mtr39/Lab 1B/treasure_hunt 
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Inferior 1 (process 262887) exited with code 01]
++r
+Starting program: /home/classes/cs223/class/rodriguez.mateo.mtr39/Lab 1B/treasure_hunt 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Inferior 1 (process 262967) exited with code 01]
++r 0 0 0 0 0
+Starting program: /home/classes/cs223/class/rodriguez.mateo.mtr39/Lab 1B/treasure_hunt 0 0 0 0 0
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Inferior 1 (process 263068) exited with code 01]
++break main
+Breakpoint 1 at 0x55555555568c: file treasure_hunt.c, line 108.
++r 0 0 0 0 0
+Starting program: /home/classes/cs223/class/rodriguez.mateo.mtr39/Lab 1B/treasure_hunt 0 0 0 0 0
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=6, argv=0x7fffffffda18) at treasure_hunt.c:108
+108	    if (!count_cargo(argc))
++l
+103	    printf("Huzzah! Ye've found the treasure! Welcome to the crew, matey!\n");
+104	}
+105	
+106	int main(int argc, char *argv[])
+107	{
+108	    if (!count_cargo(argc))
+109	    {
+110	        walk_the_plank(0, "Yer `arrrrgc` is off! We're lookin' for five secrets!");
+111	    }
+112	    decrypt_treasure_map(argv);
++l
+113	
+114	    return 0;
+115	}
++break decrypt_treasure_map
+Breakpoint 2 at 0x55555555540c: file treasure_hunt.c, line 53.
++del 1
++c
+Continuing.
+
+Breakpoint 2, decrypt_treasure_map (argv=0x7fffffffda18) at treasure_hunt.c:53
+53	{
++l
+48	    }
+49	    exit(1);
+50	}
+51	
+52	void decrypt_treasure_map(char *argv[])
+53	{
+54	    keys k = the_keys();
+55	    if (!check_shipmate_list(argv[1]))
+56	    {
+57	        walk_the_plank(1, "A pirate's name must be from our crew! Ye must find the right one.");
++l
+58	    }
+59	    if (!find_quartermaster(argv[1]))
+60	    {
+61	        walk_the_plank(1, "Arrr! That pirate is a great leader, but not the one holding this particular key to the treasure!");
+62	    }
+63	
+64	    int secret_passage = atoi(argv[2]);
+65	    int key = k.passageway_key;
+66	
+67	    if (secret_passage != key)
++l
+68	    {
+69	        walk_the_plank(2, "Ye seem to have entered the wrong passage...The map shows a different value.");
+70	    }
+71	
+72	    char date_string[DATE_LENGTH + 1];
+73	    int input_length = strlen(argv[3]);
+74	    if (input_length > DATE_LENGTH)
+75	    {
+76	        walk_the_plank(3, "Arrr! Ye input be too long for our scrolls! Try a shorter one.");
+77	    }
++l
+78	    else if (input_length < DATE_LENGTH - 2)
+79	    {
+80	        walk_the_plank(3, "Ye input be too short for our scrolls! Try a longer one.");
+81	    }
+82	    strcpy(date_string, argv[3]);
+83	
+84	    int a, b, c;
+85	    sscanf(date_string, "%d/%d/%d", &a, &b, &c);
+86	    if (a != k.celestial_moon || b != k.day_of_the_tide || c != k.era_of_destiny)
+87	    {
++s
+54	    keys k = the_keys();
++s
+55	    if (!check_shipmate_list(argv[1]))
++print k
+$1 = {day_of_the_tide = 5, crew = {0x555555556320 "Ozan", 0x555555556325 "Alan", 0x55555555632a "Andrea", 0x555555556331 "Angelica", 0x55555555633a "Caleb", 0x555555556340 "Diana", 0x555555556346 "Marcus", 0x55555555634d "Kevin", 0x555555556353 "Noah", 0x555555556358 "Denise", 0x55555555635f "Quentin", 0x55555555634d "Kevin", 0x555555556367 "James", 0x55555555636d "Joseph", 0x555555556374 "Ethan", 0x55555555637a "Itamar", 0x555555556381 "Ephraim", 0x555555556389 "Rishi"}, correct_index = 1, west_point = -72.924620000000004, era_of_destiny = 2026, celestial_moon = 2, north_point = 41.312330000000003, passageway_key = 419}
++l
+50	}
+51	
+52	void decrypt_treasure_map(char *argv[])
+53	{
+54	    keys k = the_keys();
+55	    if (!check_shipmate_list(argv[1]))
+56	    {
+57	        walk_the_plank(1, "A pirate's name must be from our crew! Ye must find the right one.");
+58	    }
+59	    if (!find_quartermaster(argv[1]))
++s
+check_shipmate_list (name=0x7fffffffddb2 "0") at treasure_hunt.c:17
+17	{
++s
+18	    keys k = the_keys();
++s
+19	    for (int i = 0; i < NUM_CREW; i++)
++l
+14	}
+15	
+16	int check_shipmate_list(const char *name)
+17	{
+18	    keys k = the_keys();
+19	    for (int i = 0; i < NUM_CREW; i++)
+20	    {
+21	        if (strcmp(name, k.crew[i]) == 0)
+22	        {
+23	            return 1;
++l
+24	        }
+25	    }
+26	    return 0;
+27	}
+28	
+29	int find_quartermaster(const char *name)
+30	{
+31	    keys k = the_keys();
+32	    if (strcmp(name, k.crew[k.correct_index]) == 0)
+33	    {
++l
+34	        return 1;
+35	    }
+36	    return 0;
+37	}
+38	
+39	void walk_the_plank(int key, char *message)
+40	{
+41	    if (key < 1 || key > 5)
+42	    {
+43	        printf("%s\n", message);
++s 10
+warning: 1156	../sysdeps/x86_64/multiarch/strcmp-evex.S: No such file or directory
++n
+1157	in ../sysdeps/x86_64/multiarch/strcmp-evex.S
++n
+1158	in ../sysdeps/x86_64/multiarch/strcmp-evex.S
++n 10
+319	in ../sysdeps/x86_64/multiarch/strcmp-evex.S
++n 10
+19	    for (int i = 0; i < NUM_CREW; i++)
++l
+14	}
+15	
+16	int check_shipmate_list(const char *name)
+17	{
+18	    keys k = the_keys();
+19	    for (int i = 0; i < NUM_CREW; i++)
+20	    {
+21	        if (strcmp(name, k.crew[i]) == 0)
+22	        {
+23	            return 1;
++s 7
+warning: 310	../sysdeps/x86_64/multiarch/strcmp-evex.S: No such file or directory
++n 50
+21	        if (strcmp(name, k.crew[i]) == 0)
++l
+16	int check_shipmate_list(const char *name)
+17	{
+18	    keys k = the_keys();
+19	    for (int i = 0; i < NUM_CREW; i++)
+20	    {
+21	        if (strcmp(name, k.crew[i]) == 0)
+22	        {
+23	            return 1;
+24	        }
+25	    }
++s
+__strcmp_evex () at ../sysdeps/x86_64/multiarch/strcmp-evex.S:229
+warning: 229	../sysdeps/x86_64/multiarch/strcmp-evex.S: No such file or directory
++n 50
+[Inferior 1 (process 263214) exited with code 01]
+warning: Error detected on fd 0
+error detected on stdin
