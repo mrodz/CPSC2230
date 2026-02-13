@@ -20,6 +20,15 @@ Date  Started  Spent Work completed
                      ==1992937==   total heap usage: 128 allocs, 128 frees, 12,333 bytes allocated
                      ==1992937== 
                      ==1992937== All heap blocks were freed -- no leaks are possible
+2/12  04:00pm   5:00 Implemented -nearest and -given. known issue: rotations/standardization (must fix,
+                     but tomorrow, because I'm tired). Fixed many valgrind issues. All that is left
+                     is -insert. Currently: 31 of  46 Total tests passed for TSP
+                     Need to work on:
+                     - 004, 005, 006 (haven't added reversals)
+                     - 008, 009, 010, 011, 012, 013 (haven't added -insert)
+                     - 017, 018, 019, 020 (haven't added -insert or reversals)
+                     - 021, 022, 023 (haven't added -insert)
+                     
                ----
                2:25  TOTAL time spent
 

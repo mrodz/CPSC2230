@@ -115,17 +115,10 @@ continue_eof:;
   return STATUS_OK;
 
 ERRDEFER:
-  for (int i = 0; i < cities_len; i++)
-  {
-    if (cities[i] != NULL)
-      city_deinit(&cities[i]);
-  }
-
+  cityarray_deinit(&cities, cities_len);
+  
   if (line_buffer != NULL)
     free(line_buffer);
-
-  if (cities != NULL)
-    free(cities);
 
   *dst = NULL;
   *dst_len = 0;
@@ -162,9 +155,15 @@ city_status parse_city_from_line(const char *line_buffer, size_t index, city **d
 
     memcpy(name, name_start, name_len);
 
-    for (line_buffer++; *line_buffer != '\0' && *line_buffer == ','; line_buffer++);
+    if (*line_buffer == '\0') {
+      err = CITY_PARSE_LAT;
+      goto ERRDEFER;
+    }
 
-    char *end_p;
+    if (*line_buffer == ',') line_buffer++;
+    // for (line_buffer++; *line_buffer != '\0' && *line_buffer == ','; line_buffer++);
+
+    char *end_p = NULL;
     // https://cplusplus.com/reference/cstdlib/strtof/
     long double lat = strtold(line_buffer, &end_p);
 
@@ -175,7 +174,13 @@ city_status parse_city_from_line(const char *line_buffer, size_t index, city **d
 
     line_buffer = end_p;
 
-    for (line_buffer++; *line_buffer != '\0' && *line_buffer == ','; line_buffer++);
+    if (*line_buffer == '\0') {
+      err = CITY_PARSE_LON;
+      goto ERRDEFER;
+    }
+
+    if (*line_buffer == ',') line_buffer++;
+    // for (line_buffer++; *line_buffer != '\0' && *line_buffer == ','; line_buffer++);
 
     // https://cplusplus.com/reference/cstdlib/strtof/
     long double lon = strtold(line_buffer, &end_p);
@@ -217,7 +222,7 @@ city_status city_deinit(city **c) {
 }
 
 city_status cityarray_deinit(city ***c, size_t len) {
-    if (c == NULL) return STATUS_OK;
+    if (c == NULL || (*c == NULL)) return STATUS_OK;
 
     for (int i = 0; i < len; i++) {
       city *element = (*c)[i];
@@ -282,6 +287,6 @@ city_status populate_arg_cities(arguments *args, city **cities_ssot, size_t citi
 
 ERRDEFER:
     cityarray_deinit(&cities, args->cities_len);
-    
+    *dst = NULL;
     return err;
 }

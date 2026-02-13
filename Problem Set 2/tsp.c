@@ -54,6 +54,7 @@ tsp_status given(arguments *args, city **cities, size_t cities_len, tsp_result *
 {
   tsp_status err;
   city **input = NULL;
+  city **order = NULL;
 
   tsp_result *result = malloc(sizeof(tsp_result));
   // ERRDEFER: free(result);
@@ -73,7 +74,7 @@ tsp_status given(arguments *args, city **cities, size_t cities_len, tsp_result *
     goto DEFER;
   }
 
-  city **order = calloc(args->cities_len + 1, sizeof(city *));
+  order = calloc(args->cities_len + 1, sizeof(city *));
   // ERRDEFER: cityarray_deinit(&order);
 
   if (order == NULL)

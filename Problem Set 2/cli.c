@@ -44,6 +44,8 @@ arguments_status arguments_init(arguments **dst, int argc, char *argv[])
 {
     arguments_status err;
 
+    heuristics *methods = NULL;
+    
     arguments *result = malloc(sizeof(arguments));
     // ERRDEFER free(result);
 
@@ -73,7 +75,7 @@ arguments_status arguments_init(arguments **dst, int argc, char *argv[])
 
     size_t methods_len = 0;
     size_t methods_cap = 2;
-    heuristics *methods = calloc(sizeof(heuristics), methods_cap);
+    methods = calloc(sizeof(heuristics), methods_cap);
     // ERRDEFER: free(methods);
 
     if (methods == NULL)

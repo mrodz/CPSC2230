@@ -65,6 +65,13 @@ int main(int argc, char **argv)
   size_t cities_len = 0;
 
   FILE *file = fopen(args->path, "r");
+
+  if (file == NULL) {
+    fprintf(stderr, "Could not open file %s\n", args->path);
+    arguments_deinit(&args);
+    return 999;
+  }
+
   city_status city_ok = read_file(file, &cities, &cities_len);
   fclose(file);
   // DEFER: cityarray_deinit(&cities, &cities_len);
@@ -85,8 +92,9 @@ int main(int argc, char **argv)
 
     if (tsp_ok != STATUS_OK)
     {
-      fprintf(stderr, "Could not run TSP: %s\n", status_string(city_ok));
+      fprintf(stderr, "Could not run TSP: %s\n", status_string(tsp_ok));
       arguments_deinit(&args);
+      cityarray_deinit(&cities, cities_len);
       return city_ok;
     }
 
